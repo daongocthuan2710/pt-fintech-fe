@@ -1,0 +1,20 @@
+/* Light theme */
+.theme-light {
+    --background: #ffffff;
+    --foreground: #0f172a;
+    --primary: #3b82f6;
+  }
+  
+  /* Dark theme */
+  .theme-dark {
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --primary: #22d3ee;
+  }
+  
+  /* Corporate theme */
+  .theme-corporate {
+    --background: #fef9c3;
+    --foreground: #1e293b;
+    --primary: #ea580c;
+  }
