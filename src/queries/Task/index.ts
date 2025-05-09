@@ -31,7 +31,7 @@ export const useGetTaskList = <T = TTask[]>(props?: TGetTaskListParams<T>) => {
   const { id: userId = '', role = 'user' } = user || {};
 
   const { options, params } = props || {};
-  const { filterField = '', filterValues, sort = '', az = '', searchTitle } = params || {};
+  const { filterField = '', filterValues, sort = '', az = '', searchTitle = '' } = params || {};
 
   return useQuery({
     queryKey: [

@@ -49,7 +49,7 @@ const DefaultInput: React.FC<InputProps> = (props) => {
       const { value } = event.target;
 
       if (props.isPositiveNumber) {
-        REGEX.POSITIVE_NUMBER.test(value) ? setValue(value) : setValue(value.slice(0, -1));
+        // REGEX.POSITIVE_NUMBER.test(value) ? setValue(value) : setValue(value.slice(0, -1));
       } else {
         setValue(value);
       }

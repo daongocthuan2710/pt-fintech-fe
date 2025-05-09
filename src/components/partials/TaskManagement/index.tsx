@@ -95,7 +95,7 @@ export const TaskListing: React.FC = memo(() => {
       filterValues: state.filterValues || [],
       sort: state.sort || '',
       az: state.az || '',
-      searchTitle: state.searchTitle,
+      searchTitle: state.searchTitle || '',
     },
   });
 
