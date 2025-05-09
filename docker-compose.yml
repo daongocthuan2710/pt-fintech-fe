@@ -7,4 +7,10 @@ services:
     ports:
       - '3000:3000'
     environment:
-      NEXT_PUBLIC_API_URL: 'http://localhost:5000'
+      NEXTAUTH_SECRET: 'vfy5CdtSFMFqELUvIGMY0oaYmUIY4prixBeRdZ8t0no'
+      NEXTAUTH_URL: 'http://localhost:3000'
+      NEXT_PUBLIC_API_URL: 'http://localhost:5000/api'
+
+networks:
+  task-management-network:
+    external: true
