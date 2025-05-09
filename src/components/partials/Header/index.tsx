@@ -10,7 +10,7 @@ const { Header } = Layout;
 
 export const AppHeader: React.FC = () => {
   const session = useSession();
-  console.log({ session });
+
   const menuItems: MenuProps['items'] = [
     {
       key: 'profile',
@@ -32,10 +32,12 @@ export const AppHeader: React.FC = () => {
       label: 'Logout',
       icon: <LogoutOutlined />,
       danger: true,
-      onClick: () =>
-        signOut({
+      onClick: () => {
+        localStorage.clear();
+        void signOut({
           callbackUrl: '/login',
-        }),
+        });
+      },
     },
   ];
 

@@ -10,6 +10,7 @@ declare module 'next-auth' {
       /** The user's postal address. */
       address: string;
       id: string;
+      role?: string;
       provider: string;
       avatar?: string | null;
     } & DefaultSession['user'];

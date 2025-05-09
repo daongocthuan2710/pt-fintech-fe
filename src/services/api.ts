@@ -1,8 +1,8 @@
 // Libraries
+import { TResponse } from '@/types/Api';
 import { Method } from 'axios';
 
 // Constants
-import { TResponse } from '@/types/api';
 
 // Types
 type TCallAPIParams = {
@@ -12,6 +12,7 @@ type TCallAPIParams = {
   params?: Record<string, any>;
   data?: any;
   version?: string;
+  token?: string;
 };
 
 export async function callApi<T>({
@@ -20,6 +21,7 @@ export async function callApi<T>({
   url,
   params,
   data,
+  token,
 }: TCallAPIParams): Promise<TResponse<T>> {
   let newUrl = `${url}`;
 
@@ -33,8 +35,7 @@ export async function callApi<T>({
       method,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer `,
-        // Authorization: `Bearer ${localStorage.getItem('accessToken') || ''}`,
+        Authorization: `Bearer ${token}`,
       },
       body: method !== 'GET' && data ? JSON.stringify(data) : null,
     });

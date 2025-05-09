@@ -7,8 +7,10 @@
   
   /* Dark theme */
   .theme-dark {
-    --background: #0f172a;
-    --foreground: #f8fafc;
+    /* --background: #0f172a; */
+    --background: #ffffff;
+    --foreground: #0f172a;
+    /* --foreground: #f8fafc; */
     --primary: #22d3ee;
   }
   

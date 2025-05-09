@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 7 * 24 * 60 * 60, // 7 days
   },
   pages: {
-    signIn: '/login',
+    // signIn: '/login',
   },
   callbacks: {
     async signIn(params) {
@@ -49,9 +49,8 @@ export const authOptions: NextAuthOptions = {
     async redirect({ url, baseUrl }) {
       return baseUrl;
     },
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
       // const now = Math.floor(Date.now() / 1000);
-      console.log({ account });
       if (user) {
         return {
           accessToken: (user as any)?.accessToken,
@@ -59,9 +58,10 @@ export const authOptions: NextAuthOptions = {
           // accessTokenExp: account?.expires_at || token.exp,
           // refreshTokenExp: now + 60 * 60 * 24 * 30,
           // provider: account?.provider || 'credentials',
-          name: user?.name,
+          name: (user as any)?.userName,
           email: user?.email,
           id: user.id,
+          role: (user as any)?.role,
         };
       }
 
@@ -73,6 +73,7 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email;
         session.user.name = token.name;
         session.accessToken = String(token.accessToken);
+        session.user.role = token?.role as string;
         // session.refreshToken = String(token.refreshToken);
       }
       return session;

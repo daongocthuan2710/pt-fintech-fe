@@ -2005,6 +2005,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.75.5":
+  version: 5.75.5
+  resolution: "@tanstack/query-core@npm:5.75.5"
+  checksum: 10c0/3627f9580df5b4a032ff830c1b1f6fa55ae754962a6aaab4ee79607917c9fbd98ce8f7302cc4c88e5b19fd6378689163eb42f32a83c05fe2dc81e7899c94d0df
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-devtools@npm:5.74.7":
+  version: 5.74.7
+  resolution: "@tanstack/query-devtools@npm:5.74.7"
+  checksum: 10c0/2c1f113d81b9645f5c90e0cfdf47bce1d3244c57e930207589403258b434680ceddb996e6d9bfcdfb02d0582be54558f5196e2e4c395767d3a85620c45fc6271
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query-devtools@npm:^5.75.5":
+  version: 5.75.5
+  resolution: "@tanstack/react-query-devtools@npm:5.75.5"
+  dependencies:
+    "@tanstack/query-devtools": "npm:5.74.7"
+  peerDependencies:
+    "@tanstack/react-query": ^5.75.5
+    react: ^18 || ^19
+  checksum: 10c0/8d98bdae2231132787efa2a846c34eaf49cda608213a759cb2989b2dd1e17549e3dffa2235b4abca0408e19ed121c4346626f7c2dd56b16e49f0cbbc1a95109c
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.75.5":
+  version: 5.75.5
+  resolution: "@tanstack/react-query@npm:5.75.5"
+  dependencies:
+    "@tanstack/query-core": "npm:5.75.5"
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: 10c0/658e6b36577c531659e19da19ce46005ae36e17517409f4105c4e9181b7ec2ac21bd6d1e2415b8e16004fdd4f7c51b724af1327834b16f1d037edabeaf9b1cbc
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^10.4.0":
   version: 10.4.0
   resolution: "@testing-library/dom@npm:10.4.0"
@@ -7400,6 +7437,8 @@ __metadata:
     "@eslint/eslintrc": "npm:^3"
     "@prisma/client": "npm:^6.7.0"
     "@tailwindcss/postcss": "npm:^4"
+    "@tanstack/react-query": "npm:^5.75.5"
+    "@tanstack/react-query-devtools": "npm:^5.75.5"
     "@testing-library/dom": "npm:^10.4.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.3.0"
@@ -7426,6 +7465,7 @@ __metadata:
     prisma: "npm:^6.7.0"
     react: "npm:19.1.0"
     react-dom: "npm:19.1.0"
+    react-fast-compare: "npm:^3.2.2"
     react-hook-form: "npm:^7.55.0"
     socket.io-client: "npm:^4.8.1"
     swr: "npm:^2.3.3"
@@ -7986,6 +8026,13 @@ __metadata:
   peerDependencies:
     react: ^19.1.0
   checksum: 10c0/3e26e89bb6c67c9a6aa86cb888c7a7f8258f2e347a6d2a15299c17eb16e04c19194e3452bc3255bd34000a61e45e2cb51e46292392340432f133e5a5d2dfb5fc
+  languageName: node
+  linkType: hard
+
+"react-fast-compare@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "react-fast-compare@npm:3.2.2"
+  checksum: 10c0/0bbd2f3eb41ab2ff7380daaa55105db698d965c396df73e6874831dbafec8c4b5b08ba36ff09df01526caa3c61595247e3269558c284e37646241cba2b90a367
   languageName: node
   linkType: hard
 
