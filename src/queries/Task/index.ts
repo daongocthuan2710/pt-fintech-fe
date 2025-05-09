@@ -95,12 +95,19 @@ export const useUpdateTask = () => {
   });
 };
 
-// export const useDeleteBrand = () => {
-//   return useMutation(deleteBrand, {
-//     onSuccess: () => {
-//       queryClient.invalidateQueries([QUERY_KEYS.GET_BRAND_LIST], {
-//         exact: false,
-//       });
-//     },
-//   });
-// };
+export const useDeleteTask = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: taskService.deleteTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_TASK_LIST],
+        exact: false,
+      });
+    },
+    onError: (error) => {
+      console.error('Error deleting task:', error);
+    },
+  });
+};

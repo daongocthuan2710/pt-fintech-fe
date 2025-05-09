@@ -1,11 +1,21 @@
 'use-client';
 
-import { Table, Button, Select, DatePicker, notification, Space, Tag, Modal, Flex } from 'antd';
+import {
+  Table,
+  Button,
+  Select,
+  DatePicker,
+  notification,
+  Space,
+  Tag,
+  Modal,
+  Flex,
+  Input as AntdInput,
+} from 'antd';
 import React, { memo, useEffect, useState } from 'react';
-import axios from 'axios';
 import dayjs from 'dayjs';
 import isEqual from 'react-fast-compare';
-import { useCreateTask, useGetTaskList, useUpdateTask } from '@/queries/Task';
+import { useCreateTask, useDeleteTask, useGetTaskList, useUpdateTask } from '@/queries/Task';
 import { TTask } from '@/models/Task';
 import { ColumnsType } from 'antd/es/table';
 import { useSession } from 'next-auth/react';
@@ -56,7 +66,7 @@ const INITIAL_STATE: TState = {
 export const TaskListing: React.FC = memo(() => {
   const { data } = useSession();
   const { user } = data || {};
-  const { id: userId = '' } = user || {};
+  const { id: userId = '', role } = user || {};
 
   const [state, setState] = useState(INITIAL_STATE);
   const [api, contextHolder] = notification.useNotification();
@@ -74,11 +84,11 @@ export const TaskListing: React.FC = memo(() => {
 
   const { mutateAsync: createTask } = useCreateTask();
   const { mutateAsync: updateTask } = useUpdateTask();
+  const { mutateAsync: deleteTask } = useDeleteTask();
   const {
     data: taskList = [],
     isLoading,
     isFetching,
-    refetch,
   } = useGetTaskList<TTask[]>({
     params: {
       filterField: state.filterField || '',
@@ -131,7 +141,7 @@ export const TaskListing: React.FC = memo(() => {
     {
       title: 'Actions',
       render: (_, record) => (
-        <Space>
+        <Space onClick={(e) => e.stopPropagation()}>
           <Button onClick={() => onSelectTask(record)}>Edit</Button>
           <Button type="primary" onClick={() => handleDelete(record.id)}>
             Delete
@@ -178,10 +188,15 @@ export const TaskListing: React.FC = memo(() => {
   };
 
   const handleDelete = async (id) => {
-    if (confirm('Are you sure you want to delete this task?')) {
-      await axios.delete(`/api/tasks/${id}`);
-      notification.success({ message: 'Task deleted successfully!' });
-      refetch();
+    if (!!userId && !!role) {
+      if (confirm('Are you sure you want to delete this task?')) {
+        const result = await deleteTask({ id: Number(id), userId, role });
+        if (!!result?.data?.status) {
+          openNotificationWithIcon('success', `Task deleted successfully!`);
+        } else {
+          openNotificationWithIcon('error', `Failed to delete new task!`);
+        }
+      }
     }
   };
 
@@ -194,7 +209,7 @@ export const TaskListing: React.FC = memo(() => {
           setState((prev) => ({ ...prev, taskDetailInfo: { ...task, title: e.target.value } }))
         }
       />
-      <Input.TextArea
+      <AntdInput.TextArea
         placeholder="Description"
         value={task?.description || ''}
         onChange={(e) =>

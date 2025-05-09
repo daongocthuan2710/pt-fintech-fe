@@ -18,6 +18,12 @@ type TGetListTaskPrams = {
   token?: string;
 };
 
+type TDeleteTaskParams = {
+  userId: string;
+  role: string;
+  id: number;
+};
+
 export const taskService = {
   getListTasks: async (params: TGetListTaskPrams) => {
     try {
@@ -49,6 +55,18 @@ export const taskService = {
         method: 'PUT',
         url: `${API_URL}/Task/${params.id}`,
         data: params,
+      });
+      return response;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+  deleteTask: async (params: TDeleteTaskParams) => {
+    try {
+      const response = await callApi<any>({
+        method: 'DELETE',
+        url: `${API_URL}/Task/${params.id}`,
+        params,
       });
       return response;
     } catch (error) {
