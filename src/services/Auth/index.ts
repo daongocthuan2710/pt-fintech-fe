@@ -26,7 +26,7 @@ export const login = async (params: TLoginParams) => {
       url: `${API_URL}/Auth/login`,
       data: params,
     });
-    console.log({ response, url: API_URL, params });
+
     return response.data;
   } catch (error) {
     return Promise.reject(error);
