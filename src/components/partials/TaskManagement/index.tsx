@@ -1,6 +1,6 @@
 'use-client';
 
-import { Table, Button, Input, Select, DatePicker, notification, Space, Tag, Modal } from 'antd';
+import { Table, Button, Select, DatePicker, notification, Space, Tag, Modal, Flex } from 'antd';
 import React, { memo, useEffect, useState } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
@@ -9,6 +9,7 @@ import { useCreateTask, useGetTaskList, useUpdateTask } from '@/queries/Task';
 import { TTask } from '@/models/Task';
 import { ColumnsType } from 'antd/es/table';
 import { useSession } from 'next-auth/react';
+import { Input } from '@/components/ui';
 
 const { Option } = Select;
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -41,6 +42,7 @@ interface TState {
   openUpdateTask: boolean;
   taskDetailInfo?: TTask;
   modalLoading: boolean;
+  searchTitle: string;
 }
 
 const INITIAL_STATE: TState = {
@@ -48,6 +50,7 @@ const INITIAL_STATE: TState = {
   openCreateTask: false,
   openUpdateTask: false,
   modalLoading: false,
+  searchTitle: '',
 };
 
 export const TaskListing: React.FC = memo(() => {
@@ -57,7 +60,7 @@ export const TaskListing: React.FC = memo(() => {
 
   const [state, setState] = useState(INITIAL_STATE);
   const [api, contextHolder] = notification.useNotification();
-  console.log({ state });
+
   const openNotificationWithIcon = (
     type: NotificationType,
     message: string,
@@ -82,6 +85,7 @@ export const TaskListing: React.FC = memo(() => {
       filterValues: state.filterValues || [],
       sort: state.sort || '',
       az: state.az || '',
+      searchTitle: state.searchTitle,
     },
   });
 
@@ -253,13 +257,20 @@ export const TaskListing: React.FC = memo(() => {
     <>
       {contextHolder}
       <div className="w-full">
-        <Button
-          type="primary"
-          onClick={() => setState((prev) => ({ ...prev, openCreateTask: true }))}
-          style={{ marginBottom: 16 }}
-        >
-          Create Task
-        </Button>
+        <Flex gap={16} align="center" style={{ marginBottom: 16 }}>
+          <Button
+            type="primary"
+            onClick={() => setState((prev) => ({ ...prev, openCreateTask: true }))}
+          >
+            Create Task
+          </Button>
+          <Input
+            style={{ width: 200 }}
+            value={state.searchTitle}
+            onAfterChange={(value) => setState((prev) => ({ ...prev, searchTitle: value }))}
+            placeholder="Search Title..."
+          />
+        </Flex>
 
         <Table
           columns={columns}

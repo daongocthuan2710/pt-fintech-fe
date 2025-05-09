@@ -15,7 +15,13 @@ import { taskService } from '@/services/Task';
 import { TTask } from '@/models/Task';
 
 type TGetTaskListParams<T> = {
-  params?: { filterField?: string; filterValues?: string[]; sort?: string; az?: string };
+  params?: {
+    filterField?: string;
+    filterValues?: string[];
+    sort?: string;
+    az?: string;
+    searchTitle: string;
+  };
   options?: UseQueryOptions<any, any, T, (string | number)[]>;
 };
 
@@ -25,7 +31,7 @@ export const useGetTaskList = <T = TTask[]>(props?: TGetTaskListParams<T>) => {
   const { id: userId = '', role = 'user' } = user || {};
 
   const { options, params } = props || {};
-  const { filterField = '', filterValues, sort = '', az = '' } = params || {};
+  const { filterField = '', filterValues, sort = '', az = '', searchTitle } = params || {};
 
   return useQuery({
     queryKey: [
@@ -37,6 +43,7 @@ export const useGetTaskList = <T = TTask[]>(props?: TGetTaskListParams<T>) => {
       az,
       filterField,
       JSON.stringify({ filterValues }) || '',
+      searchTitle,
     ],
     queryFn: () =>
       taskService.getListTasks({
@@ -47,6 +54,7 @@ export const useGetTaskList = <T = TTask[]>(props?: TGetTaskListParams<T>) => {
         filterValues,
         sort,
         az,
+        searchTitle,
       }),
     placeholderData: [],
     ...options,

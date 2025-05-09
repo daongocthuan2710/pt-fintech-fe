@@ -14,6 +14,7 @@ type TGetListTaskPrams = {
   filterValues?: string[];
   sort?: string;
   az?: string;
+  searchTitle?: string;
   token?: string;
 };
 
