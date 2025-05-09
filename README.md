@@ -2,7 +2,14 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Run with Docker:
+
+```bash
+docker pull daothuan2710/task-management-fe-frontend:latest
+docker run -d -p 3000:3000 daothuan2710/task-management-fe-frontend:latest
+```
+
+Run the development server:
 
 ```bash
 npm run dev
