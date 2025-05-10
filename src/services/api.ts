@@ -39,7 +39,6 @@ export async function callApi<T>({
       },
       body: method !== 'GET' && data ? JSON.stringify(data) : null,
     });
-
     if (!response.ok) {
       const errorData = await response.json();
       console.error('API Error:', errorData);

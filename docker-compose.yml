@@ -9,8 +9,6 @@ services:
     environment:
       NEXTAUTH_SECRET: 'vfy5CdtSFMFqELUvIGMY0oaYmUIY4prixBeRdZ8t0no'
       NEXTAUTH_URL: 'http://localhost:3000'
-      NEXT_PUBLIC_API_URL: 'http://localhost:5000/api'
-
-networks:
-  task-management-network:
-    external: true
+      NEXT_PUBLIC_API_URL: 'http://task-management-be:5000/api'
+    networks:
+      - task-management-network

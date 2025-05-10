@@ -14,7 +14,6 @@ const providers: NextAuthOptions['providers'] = [
       if (!userName || !password) {
         throw new Error('Invalid credentials');
       }
-
       const user = await login({
         username: userName,
         password,
